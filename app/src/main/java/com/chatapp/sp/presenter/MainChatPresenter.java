@@ -29,7 +29,7 @@ public class MainChatPresenter {
         }
         if (repository.isConnected()) {
             repository.sendMessage(message);
-            mvpView.showMessage();
+            mvpView.showMessage(true);
         } else {
             mvpView.showOnConnectError();
         }

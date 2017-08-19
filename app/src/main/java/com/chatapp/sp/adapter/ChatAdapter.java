@@ -31,48 +31,28 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
 
         ChatLineViewHolder viewHolder = null;
 
-            switch (viewType) {
-                case MessageItem.TYPE_INCOMING_MESSAGE:
-                case MessageItem.TYPE_OUTGOING_MESSAGE:
-                    viewHolder = new MessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R
-                        .layout.item_message, parent, false));
-                    break;
-                case TimestampItem.TYPE_TIMESTAMP:
-                    viewHolder = new TimestampViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
-                        .item_timestamp, parent, false));
-                    break;
-                default:
-                    break;
-            }
-
-//            textView.setPadding(10, 10, 10, 10);
+        switch (viewType) {
+            case MessageItem.TYPE_INCOMING_MESSAGE:
+            case MessageItem.TYPE_OUTGOING_MESSAGE:
+                viewHolder = new MessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R
+                    .layout.item_message, parent, false));
+                break;
+            case TimestampItem.TYPE_TIMESTAMP:
+                viewHolder = new TimestampViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
+                    .item_timestamp, parent, false));
+                break;
+            default:
+                break;
+        }
 
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ChatLineViewHolder chatLineViewHolder, int position) {
-//        MessageItem messageItem = messageItems.get(position);
-//        messageViewHolder.setMessage(messageItem.getMessage());
-
-        chatLineViewHolder.init(chatItems.get(position), context, chatLineViewHolder.itemView);
-
-//        setAnimation(chatLineViewHolder.itemView, position, messageItem.getType());
-
+        chatLineViewHolder.init(chatItems.get(position), context, chatLineViewHolder.itemView, lastPosition, position);
+        lastPosition = chatItems.size() - 1;
     }
-
-//    private void setAnimation(View viewToAnimate, int position, int type) {
-//        if (position > lastPosition) {
-//            Animation animation;
-//            if (type == MessageItem.TYPE_OUTGOING_MESSAGE) {
-//                animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left);
-//            } else {
-//                animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_right);
-//            }
-//            viewToAnimate.startAnimation(animation);
-//            lastPosition = position;
-//        }
-//    }
 
     @Override
     public int getItemViewType(int position) {

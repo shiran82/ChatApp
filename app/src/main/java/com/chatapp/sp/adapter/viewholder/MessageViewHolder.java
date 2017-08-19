@@ -15,10 +15,11 @@ import com.chatapp.sp.module.MessageItem;
 
 public class MessageViewHolder extends ChatLineViewHolder {
     private TextView textViewMessage;
-    private int lastPosition = -1;
+    private int lastPosition;
+    private int currentPosition;
     private Context context;
-    private View view;
     private ChatItem item;
+    private View view;
 
     public MessageViewHolder(View itemView) {
         super(itemView);
@@ -27,9 +28,11 @@ public class MessageViewHolder extends ChatLineViewHolder {
     }
 
     @Override
-    public void init(ChatItem chatItem, Context context, View view) {
+    public void init(ChatItem chatItem, Context context, View view, int lastItemPosition, int currentPosition) {
         this.context = context;
         this.view = view;
+        this.lastPosition = lastItemPosition;
+        this.currentPosition = currentPosition;
         this.item = chatItem;
         setMessage(((MessageItem) chatItem).getMessage());
     }
@@ -60,23 +63,25 @@ public class MessageViewHolder extends ChatLineViewHolder {
             default:
                 break;
         }
-        if (null == textViewMessage)
-            return;
+
+        textViewMessage.setPadding(16, 14, 16, 14);
+
         textViewMessage.setText(message);
 
-//        setAnimation();
+        setAnimation();
     }
 
-    private void setAnimation(int position, int type) {
-        if (position > lastPosition) {
+    private void setAnimation() {
+        if (item.isAnimate()) {
             Animation animation;
-            if (type == MessageItem.TYPE_OUTGOING_MESSAGE) {
+            if (getItemViewType() == MessageItem.TYPE_OUTGOING_MESSAGE) {
                 animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left);
             } else {
                 animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_right);
             }
             view.startAnimation(animation);
-            lastPosition = position;
+
+            item.setAnimate(false);
         }
     }
 

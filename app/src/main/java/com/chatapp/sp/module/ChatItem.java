@@ -2,6 +2,7 @@ package com.chatapp.sp.module;
 
 public class ChatItem {
     private String id;
+    protected boolean animate;
     protected int type;
 
     public String getId() {
@@ -18,5 +19,13 @@ public class ChatItem {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public boolean isAnimate() {
+        return animate;
+    }
+
+    public void setAnimate(boolean animate) {
+        this.animate = animate;
     }
 }

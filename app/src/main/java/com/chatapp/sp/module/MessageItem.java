@@ -7,9 +7,10 @@ public class MessageItem extends ChatItem {
 
     private String message;
 
-    public MessageItem(String message, int type) {
+    public MessageItem(String message, int type, boolean animate) {
         this.type = type;
         this.message = message;
+        this.animate = animate;
     }
 
     public int getType() {

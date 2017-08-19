@@ -18,7 +18,7 @@ public class TimestampViewHolder extends ChatLineViewHolder {
     }
 
     @Override
-    public void init(ChatItem chatItem, Context context, View view) {
+    public void init(ChatItem chatItem, Context context, View view, int lastItemPosition, int currentPosition) {
         setTimestamp(((TimestampItem) chatItem).getTimestamp());
     }
 

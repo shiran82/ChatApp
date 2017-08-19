@@ -16,5 +16,5 @@ public interface MainChatMvpView {
 
     void showOnNewMessage(JSONObject data);
 
-    void showMessage();
+    void showMessage(boolean animate);
 }

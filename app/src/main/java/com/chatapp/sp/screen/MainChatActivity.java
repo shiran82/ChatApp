@@ -41,8 +41,8 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         });
     }
 
-    private void addMessage(String message, int type) {
-        chatAdapter.add(new MessageItem(message, type));
+    private void addMessage(String message, int type, boolean animate) {
+        chatAdapter.add(new MessageItem(message, type, animate));
         chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
         scrollToBottom();
     }
@@ -112,13 +112,13 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
                 return;
             }
 
-            addMessage(message, MessageItem.TYPE_INCOMING_MESSAGE);
+            addMessage(message, MessageItem.TYPE_INCOMING_MESSAGE, true);
         });
     }
 
     @Override
-    public void showMessage() {
-        addMessage(binding.editTextMessage.getText().toString(), MessageItem.TYPE_OUTGOING_MESSAGE);
+    public void showMessage(boolean animate) {
+        addMessage(binding.editTextMessage.getText().toString(), MessageItem.TYPE_OUTGOING_MESSAGE, animate);
         binding.editTextMessage.setText("");
     }
 }
