@@ -1,10 +1,13 @@
 package com.chatapp.sp.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chatapp.sp.R;
@@ -24,12 +27,27 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int layout = -1;
-        View v;
+        View view;
 
         layout = R.layout.item_message;
-        v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
 
-        return new ViewHolder(v);
+        TextView textView = view.findViewById(R.id.text_view_message);
+        ;
+        switch (viewType) {
+            case Message.TYPE_INCOMING_MESSAGE:
+                LinearLayout linearLayout = view.findViewById(R.id.bubble_layout);
+                linearLayout.setGravity(Gravity.RIGHT);
+                textView.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
+                break;
+            case Message.TYPE_OUTGOING_MESSAGE:
+                textView.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
+                break;
+            default:
+                break;
+        }
+
+        return new ViewHolder(view);
     }
 
     @Override
