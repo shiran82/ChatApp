@@ -1,17 +1,13 @@
 package com.chatapp.sp.module;
 
-public class Message {
+public class MessageItem extends ChatItem {
 
     public static final int TYPE_INCOMING_MESSAGE = 0;
     public static final int TYPE_OUTGOING_MESSAGE = 1;
 
-    private int type;
     private String message;
 
-    private Message() {
-    }
-
-    public Message(String message, int type) {
+    public MessageItem(String message, int type) {
         this.type = type;
         this.message = message;
     }

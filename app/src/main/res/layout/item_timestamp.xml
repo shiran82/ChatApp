@@ -1,18 +1,19 @@
 <LinearLayout
     android:id="@+id/bubble_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="horizontal"
     android:paddingTop="@dimen/default_item_spacing">
 
 
     <TextView
-        android:id="@+id/text_view_message"
+        android:id="@+id/text_view_time_stamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/outgoing_chat_bubble"
-        android:text="Medium Text"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        tools:text="Medium Text"/>
 
 </LinearLayout>
