@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public interface MainChatMvpView {
 
-    void showDisconnected();
+    void showOnDisconnected();
 
     void showOnConnect();
 

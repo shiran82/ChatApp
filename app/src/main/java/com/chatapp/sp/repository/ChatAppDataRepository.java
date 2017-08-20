@@ -7,11 +7,12 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 public class ChatAppDataRepository implements ChatAppRepository {
+    private final String URI = "https://socketio-chat.now.sh/";
     private Socket socket;
 
     public ChatAppDataRepository() {
         try {
-            socket = IO.socket("https://socketio-chat.now.sh/");
+            socket = IO.socket(URI);
         } catch (URISyntaxException e) {
         }
     }

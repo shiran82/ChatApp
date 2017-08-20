@@ -44,18 +44,6 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         });
     }
 
-    private void addMessage(String message, int type, boolean animate) {
-        chatAdapter.add(new MessageItem(System.currentTimeMillis(), type, animate, message));
-        chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
-        scrollToBottom();
-    }
-
-    private void scrollToBottom() {
-        if (chatAdapter.getItemCount() > 0) {
-            binding.recyclerView.scrollToPosition(chatAdapter.getItemCount() - 1);
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -63,12 +51,12 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
     }
 
     @Override
-    public void showDisconnected() {
+    public void showOnDisconnected() {
         runOnUiThread(() -> {
-            Log.i(TAG, "diconnected");
+            Log.i(TAG, getString(R.string.disconnected));
             isConnected = false;
             Toast.makeText(getApplicationContext(),
-                "disconnected", Toast.LENGTH_LONG).show();
+                getString(R.string.disconnected), Toast.LENGTH_LONG).show();
         });
     }
 
@@ -77,7 +65,7 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         runOnUiThread(() -> {
             if (!isConnected) {
                 Toast.makeText(getApplicationContext(),
-                    "connected", Toast.LENGTH_LONG).show();
+                    getString(R.string.connected), Toast.LENGTH_LONG).show();
                 isConnected = true;
             }
         });
@@ -86,9 +74,9 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
     @Override
     public void showOnConnectError() {
         runOnUiThread(() -> {
-            Log.e(TAG, "Error connecting");
+            Log.e(TAG, getString(R.string.error_connecting));
             Toast.makeText(getApplicationContext(),
-                "error connecting", Toast.LENGTH_LONG).show();
+                getString(R.string.error_connecting), Toast.LENGTH_LONG).show();
         });
     }
 
@@ -97,7 +85,7 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         runOnUiThread(() -> {
             String message;
             try {
-                presenter.showTimestampDecider(chatAdapter.getItem(chatAdapter.getItemCount() - 1));
+                presenter.timestampDecider(chatAdapter.getItem(chatAdapter.getItemCount() - 1));
                 message = data.getString("message");
                 Log.e(TAG, message);
             } catch (JSONException e) {
@@ -120,5 +108,17 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         chatAdapter.add(new TimestampItem(System.currentTimeMillis(), Constant.TYPE_TIMESTAMP, false));
         chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
         scrollToBottom();
+    }
+
+    private void addMessage(String message, int type, boolean animate) {
+        chatAdapter.add(new MessageItem(System.currentTimeMillis(), type, animate, message));
+        chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
+        scrollToBottom();
+    }
+
+    private void scrollToBottom() {
+        if (chatAdapter.getItemCount() > 0) {
+            binding.recyclerView.scrollToPosition(chatAdapter.getItemCount() - 1);
+        }
     }
 }

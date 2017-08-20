@@ -1,21 +1,22 @@
 package com.chatapp.sp.adapter.viewholder;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.chatapp.sp.Constant;
 import com.chatapp.sp.R;
+import com.chatapp.sp.databinding.ItemMessageBinding;
 import com.chatapp.sp.module.ChatItem;
 import com.chatapp.sp.module.MessageItem;
 
 public class MessageViewHolder extends ChatLineViewHolder {
-    private TextView textViewMessage;
+    private ItemMessageBinding binding;
     private int lastItemType;
     private Context context;
     private ChatItem item;
@@ -23,8 +24,6 @@ public class MessageViewHolder extends ChatLineViewHolder {
 
     public MessageViewHolder(View itemView) {
         super(itemView);
-
-        textViewMessage = itemView.findViewById(R.id.text_view_message);
     }
 
     @Override
@@ -33,6 +32,7 @@ public class MessageViewHolder extends ChatLineViewHolder {
         this.view = view;
         this.lastItemType = lastItemType;
         this.item = chatItem;
+        binding = DataBindingUtil.getBinding(itemView);
         setMessage(((MessageItem) chatItem).getMessage());
     }
 
@@ -42,30 +42,30 @@ public class MessageViewHolder extends ChatLineViewHolder {
             case Constant.TYPE_INCOMING_MESSAGE:
                 linearLayout = view.findViewById(R.id.bubble_layout);
                 linearLayout.setGravity(Gravity.RIGHT);
-                textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
+                binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
                 if (lastItemType != 0 && lastItemType == Constant.TYPE_INCOMING_MESSAGE) {
-                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_continous_chat_bubble));
+                    binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_continous_chat_bubble));
                 } else {
-                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
+                    binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
                 }
                 break;
             case Constant.TYPE_OUTGOING_MESSAGE:
                 linearLayout = view.findViewById(R.id.bubble_layout);
                 linearLayout.setGravity(Gravity.LEFT);
-                textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
+                binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
                 if (lastItemType != 0 && lastItemType == Constant.TYPE_OUTGOING_MESSAGE) {
-                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_continous_chat_bubble));
+                    binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_continous_chat_bubble));
                 } else {
-                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
+                    binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
                 }
                 break;
             default:
                 break;
         }
 
-        textViewMessage.setPadding(16, 14, 16, 14);
+        binding.textViewMessage.setPadding(16, 14, 16, 14);
 
-        textViewMessage.setText(message);
+        binding.textViewMessage.setText(message);
 
         setAnimation();
     }
@@ -83,5 +83,4 @@ public class MessageViewHolder extends ChatLineViewHolder {
             item.setAnimate(false);
         }
     }
-
 }

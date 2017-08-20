@@ -1,20 +1,22 @@
-<LinearLayout
-    android:id="@+id/bubble_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingTop="@dimen/default_item_spacing">
-
-
-    <TextView
-        android:id="@+id/text_view_message"
-        android:layout_width="wrap_content"
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:id="@+id/bubble_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/outgoing_chat_bubble"
-        android:text="Medium Text"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:textSize="20dp"/>
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/default_item_spacing">
 
-</LinearLayout>
+
+        <TextView
+            android:id="@+id/text_view_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/outgoing_chat_bubble"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            tools:text="Medium Text"/>
+    </LinearLayout>
+</layout>
