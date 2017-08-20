@@ -10,11 +10,9 @@ public class ChatAppDataRepository implements ChatAppRepository {
     private final String URI = "https://socketio-chat.now.sh/";
     private Socket socket;
 
-    public ChatAppDataRepository() {
-        try {
-            socket = IO.socket(URI);
-        } catch (URISyntaxException e) {
-        }
+    @Override
+    public void openSocket() throws URISyntaxException {
+        socket = IO.socket(URI);
     }
 
     @Override

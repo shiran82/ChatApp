@@ -29,7 +29,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
     @Override
     public ChatLineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-
         ChatLineViewHolder viewHolder = null;
 
         switch (viewType) {
@@ -54,7 +53,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
     @Override
     public void onBindViewHolder(ChatLineViewHolder chatLineViewHolder, int position) {
         chatLineViewHolder.init(chatItems.get(position), context, chatLineViewHolder.itemView, position == 0 ?
-            0 : chatItems.get(position - 1).getType());
+            Constant.TYPE_UNKNOWN : chatItems.get(position - 1).getType());
     }
 
     @Override
@@ -68,9 +67,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
     }
 
     public ChatItem getItem(int position) {
-        if (position < 0) {
-            return null;
-        }
         return chatItems.get(position);
     }
 

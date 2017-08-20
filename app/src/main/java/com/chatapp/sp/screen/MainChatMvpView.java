@@ -1,8 +1,6 @@
 package com.chatapp.sp.screen;
 
 
-import org.json.JSONObject;
-
 public interface MainChatMvpView {
 
     void showOnDisconnected();
@@ -11,9 +9,11 @@ public interface MainChatMvpView {
 
     void showOnConnectError();
 
-    void showIncomingMessage(JSONObject data);
+    void showIncomingMessage(String message, long timestamp);
 
-    void showOutgoingMessage(boolean animate);
+    void showOutgoingMessage(boolean animate, long timestamp);
 
     void showTimestamp();
+
+    long getTimeBetweenLastAndNewItem(long newItemTime);
 }

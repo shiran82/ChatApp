@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 
 import com.chatapp.sp.Constant;
 import com.chatapp.sp.R;
@@ -21,6 +20,7 @@ public class MessageViewHolder extends ChatLineViewHolder {
     private Context context;
     private ChatItem item;
     private View view;
+    private int PADDING = 16;
 
     public MessageViewHolder(View itemView) {
         super(itemView);
@@ -37,23 +37,20 @@ public class MessageViewHolder extends ChatLineViewHolder {
     }
 
     public void setMessage(String message) {
-        LinearLayout linearLayout;
         switch (getItemViewType()) {
             case Constant.TYPE_INCOMING_MESSAGE:
-                linearLayout = view.findViewById(R.id.bubble_layout);
-                linearLayout.setGravity(Gravity.RIGHT);
+                binding.bubbleLayout.setGravity(Gravity.RIGHT);
                 binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
-                if (lastItemType != 0 && lastItemType == Constant.TYPE_INCOMING_MESSAGE) {
+                if (lastItemType == Constant.TYPE_INCOMING_MESSAGE) {
                     binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_continous_chat_bubble));
                 } else {
                     binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
                 }
                 break;
             case Constant.TYPE_OUTGOING_MESSAGE:
-                linearLayout = view.findViewById(R.id.bubble_layout);
-                linearLayout.setGravity(Gravity.LEFT);
+                binding.bubbleLayout.setGravity(Gravity.LEFT);
                 binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
-                if (lastItemType != 0 && lastItemType == Constant.TYPE_OUTGOING_MESSAGE) {
+                if (lastItemType == Constant.TYPE_OUTGOING_MESSAGE) {
                     binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_continous_chat_bubble));
                 } else {
                     binding.textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
@@ -63,7 +60,7 @@ public class MessageViewHolder extends ChatLineViewHolder {
                 break;
         }
 
-        binding.textViewMessage.setPadding(16, 14, 16, 14);
+        binding.textViewMessage.setPadding(PADDING, PADDING, PADDING, PADDING);
 
         binding.textViewMessage.setText(message);
 

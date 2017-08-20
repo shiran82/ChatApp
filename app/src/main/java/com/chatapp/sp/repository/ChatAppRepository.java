@@ -1,9 +1,13 @@
 package com.chatapp.sp.repository;
 
 
+import java.net.URISyntaxException;
+
 import io.socket.emitter.Emitter;
 
 public interface ChatAppRepository {
+
+    void openSocket() throws URISyntaxException;
 
     void connect();
 
