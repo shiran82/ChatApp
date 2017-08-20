@@ -3,7 +3,6 @@ package com.chatapp.sp;
 import com.chatapp.sp.presenter.MainChatPresenter;
 import com.chatapp.sp.repository.ChatAppRepository;
 import com.chatapp.sp.screen.MainChatMvpView;
-import com.chatapp.sp.tool.TimeTool;
 
 import org.junit.After;
 import org.junit.Before;
@@ -64,7 +63,7 @@ public class MainChatPresenterTest {
     }
 
     @Test
-    public void verifNoTimestamp() throws Exception {
+    public void verifyNoTimestamp() throws Exception {
         long time = Constant.INTERVAL_TO_SHOW_TIMESTAMP - 1;
 
         when(mockRepository.isConnected()).thenReturn(true);
