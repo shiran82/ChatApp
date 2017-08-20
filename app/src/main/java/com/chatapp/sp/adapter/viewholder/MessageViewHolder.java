@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chatapp.sp.Constant;
 import com.chatapp.sp.R;
 import com.chatapp.sp.module.ChatItem;
 import com.chatapp.sp.module.MessageItem;
@@ -38,21 +39,21 @@ public class MessageViewHolder extends ChatLineViewHolder {
     public void setMessage(String message) {
         LinearLayout linearLayout;
         switch (getItemViewType()) {
-            case MessageItem.TYPE_INCOMING_MESSAGE:
+            case Constant.TYPE_INCOMING_MESSAGE:
                 linearLayout = view.findViewById(R.id.bubble_layout);
                 linearLayout.setGravity(Gravity.RIGHT);
                 textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
-                if (lastItemType != 0 && lastItemType == MessageItem.TYPE_INCOMING_MESSAGE) {
+                if (lastItemType != 0 && lastItemType == Constant.TYPE_INCOMING_MESSAGE) {
                     textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_continous_chat_bubble));
                 } else {
                     textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
                 }
                 break;
-            case MessageItem.TYPE_OUTGOING_MESSAGE:
+            case Constant.TYPE_OUTGOING_MESSAGE:
                 linearLayout = view.findViewById(R.id.bubble_layout);
                 linearLayout.setGravity(Gravity.LEFT);
                 textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
-                if (lastItemType != 0 && lastItemType == MessageItem.TYPE_OUTGOING_MESSAGE) {
+                if (lastItemType != 0 && lastItemType == Constant.TYPE_OUTGOING_MESSAGE) {
                     textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_continous_chat_bubble));
                 } else {
                     textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
@@ -72,7 +73,7 @@ public class MessageViewHolder extends ChatLineViewHolder {
     private void setAnimation() {
         if (item.isAnimate()) {
             Animation animation;
-            if (getItemViewType() == MessageItem.TYPE_OUTGOING_MESSAGE) {
+            if (getItemViewType() == Constant.TYPE_OUTGOING_MESSAGE) {
                 animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left);
             } else {
                 animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_right);

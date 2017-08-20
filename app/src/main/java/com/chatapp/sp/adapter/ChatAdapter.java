@@ -5,13 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.chatapp.sp.Constant;
 import com.chatapp.sp.R;
 import com.chatapp.sp.adapter.viewholder.ChatLineViewHolder;
 import com.chatapp.sp.adapter.viewholder.MessageViewHolder;
 import com.chatapp.sp.adapter.viewholder.TimestampViewHolder;
 import com.chatapp.sp.module.ChatItem;
-import com.chatapp.sp.module.MessageItem;
-import com.chatapp.sp.module.TimestampItem;
 
 import java.util.List;
 
@@ -32,12 +31,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
         ChatLineViewHolder viewHolder = null;
 
         switch (viewType) {
-            case MessageItem.TYPE_INCOMING_MESSAGE:
-            case MessageItem.TYPE_OUTGOING_MESSAGE:
+            case Constant.TYPE_INCOMING_MESSAGE:
+            case Constant.TYPE_OUTGOING_MESSAGE:
                 viewHolder = new MessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R
                     .layout.item_message, parent, false));
                 break;
-            case TimestampItem.TYPE_TIMESTAMP:
+            case Constant.TYPE_TIMESTAMP:
                 viewHolder = new TimestampViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
                     .item_timestamp, parent, false));
                 break;

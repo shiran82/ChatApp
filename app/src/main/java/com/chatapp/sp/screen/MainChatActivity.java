@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.chatapp.sp.Constant;
 import com.chatapp.sp.R;
 import com.chatapp.sp.adapter.ChatAdapter;
 import com.chatapp.sp.databinding.ActivityMainChatBinding;
@@ -104,19 +105,19 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
                 return;
             }
 
-            addMessage(message, MessageItem.TYPE_INCOMING_MESSAGE, true);
+            addMessage(message, Constant.TYPE_INCOMING_MESSAGE, true);
         });
     }
 
     @Override
     public void showOutgoingMessage(boolean animate) {
-        addMessage(binding.editTextMessage.getText().toString(), MessageItem.TYPE_OUTGOING_MESSAGE, animate);
+        addMessage(binding.editTextMessage.getText().toString(), Constant.TYPE_OUTGOING_MESSAGE, animate);
         binding.editTextMessage.setText("");
     }
 
     @Override
     public void showTimestamp() {
-        chatAdapter.add(new TimestampItem(System.currentTimeMillis(), TimestampItem.TYPE_TIMESTAMP, false));
+        chatAdapter.add(new TimestampItem(System.currentTimeMillis(), Constant.TYPE_TIMESTAMP, false));
         chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
         scrollToBottom();
     }
