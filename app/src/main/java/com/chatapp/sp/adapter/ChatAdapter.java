@@ -50,7 +50,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
 
     @Override
     public void onBindViewHolder(ChatLineViewHolder chatLineViewHolder, int position) {
-        chatLineViewHolder.init(chatItems.get(position), context, chatLineViewHolder.itemView, lastPosition, position);
+        chatLineViewHolder.init(chatItems.get(position), context, chatLineViewHolder.itemView, position == 0 ?
+            0 : chatItems.get(position - 1).getType());
         lastPosition = chatItems.size() - 1;
     }
 
@@ -62,6 +63,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatLineViewHolder> {
     @Override
     public int getItemCount() {
         return chatItems.size();
+    }
+
+    public ChatItem getItem(int position) {
+        if (position < 0) {
+            return null;
+        }
+        return chatItems.get(position);
     }
 
     public void add(ChatItem messageItem) {

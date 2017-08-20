@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import com.chatapp.sp.R;
 import com.chatapp.sp.module.ChatItem;
-import com.chatapp.sp.module.TimestampItem;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimestampViewHolder extends ChatLineViewHolder {
     private TextView textViewMessage;
@@ -18,12 +20,13 @@ public class TimestampViewHolder extends ChatLineViewHolder {
     }
 
     @Override
-    public void init(ChatItem chatItem, Context context, View view, int lastItemPosition, int currentPosition) {
-        setTimestamp(((TimestampItem) chatItem).getTimestamp());
+    public void init(ChatItem chatItem, Context context, View view, int lastItemType) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        textViewMessage.setText(sdf.format(new Date(chatItem.getTime())));
     }
 
 
     public void setTimestamp(String timestamp) {
-        textViewMessage.setText("22/3/2017");
+        textViewMessage.setText(timestamp);
     }
 }

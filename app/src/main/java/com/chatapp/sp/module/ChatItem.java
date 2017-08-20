@@ -1,16 +1,14 @@
 package com.chatapp.sp.module;
 
 public class ChatItem {
-    private String id;
-    protected boolean animate;
-    protected int type;
+    private long time;
+    private boolean animate;
+    private int type;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public ChatItem(long time, int type, boolean animate) {
+        this.time = time;
+        this.type = type;
+        this.animate = animate;
     }
 
     public int getType() {
@@ -27,5 +25,13 @@ public class ChatItem {
 
     public void setAnimate(boolean animate) {
         this.animate = animate;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

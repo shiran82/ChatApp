@@ -11,5 +11,5 @@ public abstract class ChatLineViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public abstract void init(ChatItem chatItem, Context context, View view, int lastItemPosition, int currentPosition);
+    public abstract void init(ChatItem chatItem, Context context, View view, int lastItemType);
 }

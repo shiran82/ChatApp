@@ -11,6 +11,7 @@ import com.chatapp.sp.R;
 import com.chatapp.sp.adapter.ChatAdapter;
 import com.chatapp.sp.databinding.ActivityMainChatBinding;
 import com.chatapp.sp.module.MessageItem;
+import com.chatapp.sp.module.TimestampItem;
 import com.chatapp.sp.presenter.MainChatPresenter;
 import com.chatapp.sp.repository.ChatAppDataRepository;
 
@@ -37,12 +38,13 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         chatAdapter = new ChatAdapter(this, new ArrayList<>());
         binding.recyclerView.setAdapter(chatAdapter);
         binding.buttonSendMessage.setOnClickListener(view -> {
-            presenter.sendMessage(binding.editTextMessage.getText().toString());
+            presenter.sendMessage(binding.editTextMessage.getText().toString(), chatAdapter.getItem(chatAdapter
+                .getItemCount() - 1));
         });
     }
 
     private void addMessage(String message, int type, boolean animate) {
-        chatAdapter.add(new MessageItem(message, type, animate));
+        chatAdapter.add(new MessageItem(System.currentTimeMillis(), type, animate, message));
         chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
         scrollToBottom();
     }
@@ -57,16 +59,6 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.onDetach();
-    }
-
-    @Override
-    public void showIncomingMessage() {
-
-    }
-
-    @Override
-    public void showOutgoingMessage() {
-
     }
 
     @Override
@@ -99,12 +91,12 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         });
     }
 
-
     @Override
-    public void showOnNewMessage(JSONObject data) {
+    public void showIncomingMessage(JSONObject data) {
         runOnUiThread(() -> {
             String message;
             try {
+                presenter.showTimestampDecider(chatAdapter.getItem(chatAdapter.getItemCount() - 1));
                 message = data.getString("message");
                 Log.e(TAG, message);
             } catch (JSONException e) {
@@ -117,8 +109,15 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
     }
 
     @Override
-    public void showMessage(boolean animate) {
+    public void showOutgoingMessage(boolean animate) {
         addMessage(binding.editTextMessage.getText().toString(), MessageItem.TYPE_OUTGOING_MESSAGE, animate);
         binding.editTextMessage.setText("");
+    }
+
+    @Override
+    public void showTimestamp() {
+        chatAdapter.add(new TimestampItem(System.currentTimeMillis(), TimestampItem.TYPE_TIMESTAMP, false));
+        chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
+        scrollToBottom();
     }
 }

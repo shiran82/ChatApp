@@ -15,8 +15,7 @@ import com.chatapp.sp.module.MessageItem;
 
 public class MessageViewHolder extends ChatLineViewHolder {
     private TextView textViewMessage;
-    private int lastPosition;
-    private int currentPosition;
+    private int lastItemType;
     private Context context;
     private ChatItem item;
     private View view;
@@ -28,11 +27,10 @@ public class MessageViewHolder extends ChatLineViewHolder {
     }
 
     @Override
-    public void init(ChatItem chatItem, Context context, View view, int lastItemPosition, int currentPosition) {
+    public void init(ChatItem chatItem, Context context, View view, int lastItemType) {
         this.context = context;
         this.view = view;
-        this.lastPosition = lastItemPosition;
-        this.currentPosition = currentPosition;
+        this.lastItemType = lastItemType;
         this.item = chatItem;
         setMessage(((MessageItem) chatItem).getMessage());
     }
@@ -44,21 +42,21 @@ public class MessageViewHolder extends ChatLineViewHolder {
                 linearLayout = view.findViewById(R.id.bubble_layout);
                 linearLayout.setGravity(Gravity.RIGHT);
                 textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
-//                if (lastPosition != -1 && messageItems.get(lastPosition).getType() == MessageItem.TYPE_INCOMING_MESSAGE) {
-//                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_continous_chat_bubble));
-//                } else {
-//                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
-//                }
+                if (lastItemType != 0 && lastItemType == MessageItem.TYPE_INCOMING_MESSAGE) {
+                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_continous_chat_bubble));
+                } else {
+                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.incoming_chat_bubble));
+                }
                 break;
             case MessageItem.TYPE_OUTGOING_MESSAGE:
                 linearLayout = view.findViewById(R.id.bubble_layout);
                 linearLayout.setGravity(Gravity.LEFT);
                 textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
-//                if (lastPosition != -1 && messageItems.get(lastPosition).getType() == MessageItem.TYPE_OUTGOING_MESSAGE) {
-//                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_continous_chat_bubble));
-//                } else {
-//                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
-//                }
+                if (lastItemType != 0 && lastItemType == MessageItem.TYPE_OUTGOING_MESSAGE) {
+                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_continous_chat_bubble));
+                } else {
+                    textViewMessage.setBackground(ContextCompat.getDrawable(context, R.drawable.outgoing_chat_bubble));
+                }
                 break;
             default:
                 break;
