@@ -79,4 +79,8 @@ public class MainChatPresenter {
 
         return item;
     }
+
+    public void requestItemsFromLocalDB() {
+        //will use realm to save and fetch items from local db and call the relevant show message method in the activity
+    }
 }
