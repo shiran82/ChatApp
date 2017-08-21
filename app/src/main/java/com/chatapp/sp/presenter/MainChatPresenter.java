@@ -22,15 +22,14 @@ public class MainChatPresenter {
         this.mvpView = mvpView;
     }
 
-    public void openSocket() {
+    public void setListenersAndConnect() {
         try {
             repository.openSocket();
         } catch (URISyntaxException e) {
             mvpView.showOnConnectError();
+            return;
         }
-    }
 
-    public void setAndConnectToSocket() {
         repository.addEventListener(Socket.EVENT_DISCONNECT, event -> mvpView.showOnDisconnected());
         repository.addEventListener(Socket.EVENT_CONNECT_TIMEOUT, event -> mvpView.showOnConnectError());
         repository.addEventListener(Socket.EVENT_CONNECTING, event -> mvpView.showOnConnect());

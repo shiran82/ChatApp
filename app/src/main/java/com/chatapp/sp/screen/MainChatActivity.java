@@ -29,8 +29,7 @@ public class MainChatActivity extends Activity implements MainChatMvpView {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_chat);
         presenter = new MainChatPresenter(new ChatAppDataRepository(), this);
 
-        presenter.openSocket();
-        presenter.setAndConnectToSocket();
+        presenter.setListenersAndConnect();
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatAdapter = new ChatAdapter(this, new ArrayList<>());

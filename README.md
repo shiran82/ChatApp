@@ -14,3 +14,4 @@ Feature roadmap:
 * Very easy to implement onType (when other side is typing) by just adding a listener like the listeners for the connect etc.)
 * There needs to be a decision for what happens when a user is trying to send a message while offline, should it try to resend it, should user get a notification to try himself, should send button just be disabled, there needs to be an event sent from the sever side (like the event for incoming message implemented by the demo server I used) to tell client that the message has been received 
 * Every ChatItem that comes from the server can be handled by using a different viewholder for each item. Just like MessageItem and TimestampItem - it is also possible to implement a Bill class and support it by creating a new viewholder that knows how to represent the data for that class. -> Modularity
+* The usage of Gson enables easy usage for future Items that are different from MessageItem and TiemstampItem

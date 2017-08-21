@@ -17,7 +17,9 @@ public class ChatAppDataRepository implements ChatAppRepository {
 
     @Override
     public void connect() {
-        socket.connect();
+        if (socket != null) {
+            socket.connect();
+        }
     }
 
     @Override
@@ -32,16 +34,21 @@ public class ChatAppDataRepository implements ChatAppRepository {
 
     @Override
     public void disconnect() {
-        socket.disconnect();
+
+        if (socket != null) {
+            socket.disconnect();
+        }
     }
 
     @Override
     public void removeEventListeners() {
-        socket.off();
+        if (socket != null) {
+            socket.off();
+        }
     }
 
     @Override
     public boolean isConnected() {
-        return socket.connected();
+        return socket == null ? false : socket.connected();
     }
 }
